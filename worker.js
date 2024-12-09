@@ -94,7 +94,8 @@ userQueue.process(async (job, done) => {
     if (!user) {
       const error = new Error('User not found');
       console.error(error.message);
-      return done(error);
+      done(error);
+      return;
     }
 
     console.log(`Sending welcome email to ${user.email}`);
