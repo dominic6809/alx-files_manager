@@ -35,17 +35,19 @@ fileQueue.process(async (job, done) => {
   if (!fileId) {
     const error = new Error('Missing fileId');
     console.error(error.message);
-    return done(error);
+    done(error);
+    return;
   }
 
   if (!userId) {
     const error = new Error('Missing userId');
     console.error(error.message);
-    return done(error);
+    done(error);
+    return;
   }
 
   console.log('Processing job for file:', job.data.name || 'Unnamed file');
-  
+
   try {
     // Fetch file from the database
     const file = await (await dbClient.filesCollection())
@@ -57,7 +59,8 @@ fileQueue.process(async (job, done) => {
     if (!file) {
       const error = new Error('File not found');
       console.error(error.message);
-      return done(error);
+      done(error);
+      return;
     }
 
     // Generate thumbnails for the specified sizes
@@ -79,7 +82,8 @@ userQueue.process(async (job, done) => {
   if (!userId) {
     const error = new Error('Missing userId');
     console.error(error.message);
-    return done(error);
+    done(error);
+    return;
   }
 
   try {

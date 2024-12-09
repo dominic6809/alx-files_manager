@@ -3,9 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 
 /**
  * Custom error class to represent API-specific errors.
- * This class extends the native JavaScript Error class and allows us 
+ * This class extends the native JavaScript Error class and allows us
  * to create errors with a custom status code and message.
- * 
+ *
  * @param {number} code The HTTP status code to be associated with the error (default is 500).
  * @param {string} message The message describing the error.
  */
@@ -19,12 +19,12 @@ export class APIError extends Error {
 
 /**
  * Express middleware to handle and format error responses.
- * This function processes errors thrown in the application and sends 
+ * This function processes errors thrown in the application and sends
  * an appropriate HTTP response to the client.
- * 
+ *
  * If the error is an instance of APIError, it sends the error code and message.
  * Otherwise, it defaults to a 500 error with a generic message.
- * 
+ *
  * @param {Error} err The error object (either an APIError or a generic error).
  * @param {Request} req The Express request object.
  * @param {Response} res The Express response object.

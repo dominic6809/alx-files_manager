@@ -31,10 +31,10 @@ export default class AuthController {
       await redisClient.del(`auth_${token}`);
 
       // Respond with no content (successful logout)
-      res.status(204).send();
+      return res.status(204).send();
     } catch (error) {
       console.error('Error in getDisconnect:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ error: 'Internal server error' });
     }
   }
 }

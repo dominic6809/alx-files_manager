@@ -24,7 +24,8 @@ export default class UsersController {
         return res.status(400).json({ error: 'Already exist' });
       }
 
-      const insertionInfo = await (await dbClient.usersCollection()).insertOne({ email, password: sha1(password) });
+      const usersColl = await dbClient.usersCollection();
+      const insertionInfo = await usersColl.insertOne({ email, password: sha1(password) });
       const userId = insertionInfo.insertedId.toString();
 
       // Add the user to the email sending queue (background task)

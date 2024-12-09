@@ -5,10 +5,10 @@ import { getUserFromXToken, getUserFromAuthorization } from '../utils/auth';
 /**
  * Middleware to authenticate a user using Basic Authentication.
  * This checks the 'Authorization' header in the request and validates
- * the user's credentials. If the user is authenticated, the user data 
- * is attached to the request object. If authentication fails, a 401 
+ * the user's credentials. If the user is authenticated, the user data
+ * is attached to the request object. If authentication fails, a 401
  * Unauthorized response is sent.
- * 
+ *
  * @param {Request} req The Express request object.
  * @param {Response} res The Express response object.
  * @param {NextFunction} next The Express next function to pass control to the next middleware.
@@ -32,11 +32,11 @@ export const basicAuthenticate = async (req, res, next) => {
 
 /**
  * Middleware to authenticate a user using an X-Token.
- * This checks the 'X-Token' header in the request and retrieves the 
- * associated user from Redis. If the token is valid, the user data is 
- * attached to the request object. If the token is invalid or not found, 
+ * This checks the 'X-Token' header in the request and retrieves the
+ * associated user from Redis. If the token is valid, the user data is
+ * attached to the request object. If the token is invalid or not found,
  * a 401 Unauthorized response is sent.
- * 
+ *
  * @param {Request} req The Express request object.
  * @param {Response} res The Express response object.
  * @param {NextFunction} next The Express next function to pass control to the next middleware.

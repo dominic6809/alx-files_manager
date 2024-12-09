@@ -2,7 +2,9 @@
 import fs from 'fs';
 import readline from 'readline';
 import { promisify } from 'util';
+/* eslint-disable-next-line import/no-unresolved */
 import mimeMessage from 'mime-message';
+/* eslint-disable-next-line import/no-unresolved */
 import { gmail_v1 as gmailV1, google } from 'googleapis';
 
 // Define the required OAuth2 scopes for sending emails
@@ -26,13 +28,13 @@ async function getNewToken(oAuth2Client, callback) {
     scope: SCOPES,
   });
   console.log('Authorize this app by visiting this url:', authUrl);
-  
+
   // Create an interface to read user input from the command line
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  
+
   // Ask the user to enter the code from the authorization URL
   rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
@@ -64,7 +66,7 @@ async function authorize(credentials, callback) {
   const clientSecret = credentials.web.client_secret;
   const clientId = credentials.web.client_id;
   const redirectURIs = credentials.web.redirect_uris;
-  
+
   // Create OAuth2 client with the credentials
   const oAuth2Client = new google.auth.OAuth2(
     clientId,
@@ -72,13 +74,13 @@ async function authorize(credentials, callback) {
     redirectURIs[0],
   );
   console.log('Client authorization beginning');
-  
+
   // Try to read the stored token and authorize the client
   await readFileAsync(TOKEN_PATH)
     .then((token) => {
       oAuth2Client.setCredentials(JSON.parse(token));
       callback(oAuth2Client);
-    }).catch(async () => getNewToken(oAuth2Client, callback));  // If no token, get a new one
+    }).catch(async () => getNewToken(oAuth2Client, callback)); // If no token, get a new one
   console.log('Client authorization done');
 }
 
@@ -132,7 +134,7 @@ export default class Mailer {
    * @returns {object} The email message in MIME format.
    */
   static buildMessage(dest, subject, message) {
-    const senderEmail = process.env.GMAIL_SENDER;  // Get sender's email from environment variables
+    const senderEmail = process.env.GMAIL_SENDER; // Get sender's email from environment variables
     const msgData = {
       type: 'text/html',
       encoding: 'UTF-8',

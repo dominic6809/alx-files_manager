@@ -11,7 +11,8 @@ import redisClient from './redis';
  * This method decodes the base64 token from the 'Authorization' header,
  * then validates the user's email and password by comparing them with the database.
  * @param {Request} req The Express request object.
- * @returns {Promise<{_id: ObjectId, email: string, password: string}>} The user object if valid credentials are found, null otherwise.
+ * @returns {Promise<{_id: ObjectId, email: string, password: string}>}
+ * The user object if valid credentials are found, null otherwise.
  */
 export const getUserFromAuthorization = async (req) => {
   // Extracts the Authorization header from the request
@@ -49,7 +50,8 @@ export const getUserFromAuthorization = async (req) => {
  * This method retrieves the user ID associated with the provided X-Token
  * from the Redis cache, and if a user ID is found, it queries the database for the user.
  * @param {Request} req The Express request object.
- * @returns {Promise<{_id: ObjectId, email: string, password: string}>} The user object if the token is valid, null otherwise.
+ * @returns {Promise<{_id: ObjectId, email: string, password: string}>}
+ * The user object if the token is valid, null otherwise.
  */
 export const getUserFromXToken = async (req) => {
   // Extracts the X-Token header from the request
