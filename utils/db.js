@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// eslint-disable-next-line no-unused-vars
 import mongodb from 'mongodb';
 import Collection from 'mongodb/lib/collection';
 import envLoader from './env_loader';
@@ -10,12 +11,12 @@ import envLoader from './env_loader';
  * and providing methods to check connection status and retrieve data from collections.
  */
 class DBClient {
-    /**
+  /**
      * Constructor that creates and connects to a MongoDB client.
-     * The connection parameters are retrieved from environment variables, 
+     * The connection parameters are retrieved from environment variables,
      * with defaults provided if variables are not set.
      */
-    constructor() {
+  constructor() {
     envLoader();
     const host = process.env.DB_HOST || 'localhost';
     const port = process.env.DB_PORT || 27017;
@@ -26,43 +27,43 @@ class DBClient {
     this.client.connect();
   }
 
-    /**
+  /**
      * Checks whether the connection to MongoDB is successful.
      * Returns true if connected, false otherwise.
      *
      * @returns {boolean} true if connected to MongoDB, false otherwise
      */
-    isAlive() {
+  isAlive() {
     return this.client.isConnected();
   }
 
-    /**
+  /**
      * Retrieves the number of users in the 'users' collection.
      * This method returns the count of documents in the 'users' collection.
      *
      * @returns {Promise<number>} The number of documents in the 'users' collection.
      */
-    async nbUsers() {
+  async nbUsers() {
     return this.client.db().collection('users').countDocuments();
   }
 
-    /**
+  /**
      * Retrieves the number of files in the 'files' collection.
      * This method returns the count of documents in the 'files' collection.
      *
      * @returns {Promise<number>} The number of documents in the 'files' collection.
      */
-    async nbFiles() {
+  async nbFiles() {
     return this.client.db().collection('files').countDocuments();
   }
-    
-    /**
+
+  /**
    * Retrieves a reference to the `files` collection.
    * @returns {Promise<Collection>}
    */
-    async usersCollection() {
+  async usersCollection() {
     return this.client.db().collection('users');
-    }
+  }
 }
 
 // Create an instance of DBClient
